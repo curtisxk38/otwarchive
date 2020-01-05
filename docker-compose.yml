@@ -16,6 +16,8 @@ services:
       - "6379:6379"
   es:
     image: elasticsearch:6.8.3
+    environment:
+      - transport.host=localhost
     container_name: otwa_es
     ports:
       - "9200:9200"
