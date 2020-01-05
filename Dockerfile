@@ -7,5 +7,11 @@ COPY Gemfile.lock .
 RUN gem install bundler -v 1.17.3 && bundle install
 
 COPY . .
+
+# runs rake commands on start
+ENTRYPOINT ["./docker-entrypoint.sh"]
+
 EXPOSE 3000
-CMD bundle exec rails s -p 3000
+
+# start the main process
+CMD ["bundle", "exec", "rails", "s", "-p", "3000"]
