@@ -56,8 +56,6 @@ rake search:index_works
 rake search:index_pseuds
 rake search:index_bookmarks
 
-sleep 60
-
 # Then exec the container's main process (what's set as CMD in the Dockerfile 
 #  or as command in docker-compose.yml)
 exec "$@"
