@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 set -e
 
+
+export host="$1"
+shift
+export port="$1"
+shift
+cmd="$@"
+
 rm -f tmp/pids/server.pid
 
 ################# 
@@ -15,7 +22,7 @@ wait_for()
 {
     while :
     do
-        nc -z db 3306
+        nc -z $host $port
         WAITFORIT_result=$?
         if [[ $WAITFORIT_result -eq 0 ]]; then
             echo "mysql is ready"
@@ -56,6 +63,4 @@ rake search:index_works
 rake search:index_pseuds
 rake search:index_bookmarks
 
-# Then exec the container's main process (what's set as CMD in the Dockerfile 
-#  or as command in docker-compose.yml)
 exec "$@"
